@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTracker - Market Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>CryptoTracker</h1>
+                <p>Real-time Cryptocurrency Market Analytics</p>
+            </div>
+            <button class="refresh-btn" onclick="loadData()">
+                <span class="refresh-icon">⟳</span> Load Data
+            </button>
+        </header>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading market data...</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-label">Bitcoin Price</div>
+                <div class="stat-value" id="btcPrice">--</div>
+                <div class="stat-change" id="btcChange">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ethereum Price</div>
+                <div class="stat-value" id="ethPrice">--</div>
+                <div class="stat-change" id="ethChange">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Market Cap</div>
+                <div class="stat-value" id="marketCap">--</div>
+                <div class="stat-change" id="marketChange">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Volume</div>
+                <div class="stat-value" id="volume">--</div>
+                <div class="stat-change">Global</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>Top 5 Cryptocurrencies by Market Cap</h2>
+                <div class="chart-container">
+                    <canvas id="marketCapChart" width="400" height="280"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Price Change Distribution (24h)</h2>
+                <div class="chart-container">
+                    <canvas id="priceChangeChart" width="400" height="280"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Market Dominance</h2>
+                <div class="chart-container">
+                    <canvas id="dominanceChart" width="400" height="280"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Top 10 Cryptocurrencies Performance</h2>
+                <div class="chart-container">
+                    <canvas id="performanceChart" width="400" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="interaction-panel">
+            <div class="panel-section">
+                <h3>Quick View</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="setView('24h')">24 Hours</button>
+                    <button class="filter-btn" onclick="setView('7d')">7 Days</button>
+                    <button class="filter-btn" onclick="setView('30d')">30 Days</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="crypto-table">
+            <h3>Top Cryptocurrencies</h3>
+            <table id="cryptoTable">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Price (USD)</th>
+                        <th>Market Cap</th>
+                        <th>24h Change</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="5" style="text-align: center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
